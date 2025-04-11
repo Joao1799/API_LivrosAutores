@@ -17,6 +17,28 @@ router.get('/:id', async (req, res) => {
     res.json(book);
 });
 
+// PUT /books/:id
+router.put('/:id', async (req, res) => {
+    const { name, author_id, pages } = req.body;
+  
+    try {
+      const updatedBook = await prisma.book.update({
+        where: { id:req.params.id},
+        data: {
+          name,
+          author_id,
+          pages: parseInt(pages),
+        },
+      });
+      console.log(updatedBook);
+      
+      res.json(updatedBook);
+    } catch (error) {
+      console.error("Erro ao atualizar livro:", error);
+      res.status(400).json({ error: "Erro ao atualizar livro." });
+    }
+  });
+
 // POST /books
 router.post('/', async (req, res) => {
     const { name, author_id, pages } = req.body;

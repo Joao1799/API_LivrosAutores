@@ -17,6 +17,27 @@ router.get('/:id', async (req, res) => {
     res.json(author);
 });
 
+// PUT /authors/:id
+router.put('/:id', async (req, res) => {
+    const { name, email } = req.body;
+  
+    try {
+      const updatedAuthor = await prisma.author.update({
+        where: { id: req.params.id },
+        data: {
+          name,
+          email,
+        },
+      });
+      console.log(updatedAuthor);
+      
+      res.json(updatedAuthor);
+    } catch (error) {
+      console.error("Erro ao atualizar autor:", error);
+      res.status(400).json({ error: "Erro ao atualizar autor." });
+    }
+  });
+  
 // POST /authors
 router.post('/', async (req, res) => {
     const { name, email } = req.body;
