@@ -14,6 +14,6 @@ app.use('/books', require('./routes/book.js'));
 app.use('/authors', require('./routes/author.js'));
 app.use('/user', require('./routes/user.js'));
 
-app.listen(3001, () => {
-    console.log('🚀 API rodando em http://localhost:3001');
+app.listen(4242, () => {
+    console.log('🚀 API rodando em http://localhost:4242');
 });
